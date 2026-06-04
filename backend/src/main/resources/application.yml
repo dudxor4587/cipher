@@ -1,0 +1,24 @@
+# 공통 설정. 프로필별 설정은 application-{dev,prod}.yml 참고.
+# 기본 프로필 = dev (로컬 docker-compose Postgres). 운영은 --spring.profiles.active=prod
+spring:
+  application:
+    name: cipher
+  profiles:
+    active: dev
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+server:
+  port: 8080
+
+cipher:
+  jwt:
+    validity-ms: 86400000   # 24h
+
+logging:
+  level:
+    org.hibernate.SQL: debug

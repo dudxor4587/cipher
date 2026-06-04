@@ -1,0 +1,18 @@
+# dev: 로컬 docker-compose 로 띄운 Postgres 를 그대로 사용 (backend/docker-compose.yml 와 동일 값).
+#   docker compose up -d  후  ./gradlew bootRun  (기본 프로필이 dev)
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cipher
+    driver-class-name: org.postgresql.Driver
+    username: cipher
+    password: cipher
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+cipher:
+  jwt:
+    secret: cipher-dev-secret-key-please-change-me-in-prod-0123456789
+  aes:
+    key: cipher-dev-aes-key-change-me-in-prod

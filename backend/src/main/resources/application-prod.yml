@@ -1,0 +1,19 @@
+# prod: 모든 접속정보·비밀은 환경변수 주입. 기본값 없음 → 미설정 시 기동 실패(fail-fast).
+#   실행 예) DB_URL=... DB_USERNAME=... DB_PASSWORD=... CIPHER_JWT_SECRET=... CIPHER_AES_KEY=... \
+#           java -jar cipher.jar --spring.profiles.active=prod
+spring:
+  datasource:
+    url: ${DB_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update   # 운영 안정화 시 validate + Flyway 마이그레이션으로 전환 권장
+
+cipher:
+  jwt:
+    secret: ${CIPHER_JWT_SECRET}
+  aes:
+    key: ${CIPHER_AES_KEY}

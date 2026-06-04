@@ -1,0 +1,22 @@
+# 로컬 개발용 PostgreSQL. `docker compose up -d` 로 띄우고,
+# 앱은 `--spring.profiles.active=postgres` 로 실행하면 여기 붙는다.
+services:
+  postgres:
+    image: postgres:16
+    container_name: cipher-postgres
+    environment:
+      POSTGRES_DB: cipher
+      POSTGRES_USER: cipher
+      POSTGRES_PASSWORD: cipher
+    ports:
+      - "5432:5432"
+    volumes:
+      - cipher-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cipher -d cipher"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  cipher-pgdata:

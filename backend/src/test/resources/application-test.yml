@@ -1,0 +1,19 @@
+# 테스트: 실제 PostgreSQL(Testcontainers)로 검증. datasource 는 BaseTest 의 컨테이너가 주입.
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+
+cipher:
+  jwt:
+    secret: test-secret-key-0123456789-0123456789-abcdef
+    validity-ms: 3600000
+  aes:
+    key: test-aes-key
+
+logging:
+  level:
+    org.hibernate.SQL: warn
