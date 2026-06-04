@@ -8,6 +8,7 @@ export function LoginPage() {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -15,6 +16,10 @@ export function LoginPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (mode === 'signup' && password !== passwordConfirm) {
+      setError('비밀번호가 일치하지 않습니다.');
+      return;
+    }
     setBusy(true);
     try {
       const result =
@@ -58,6 +63,15 @@ export function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
         />
+        {mode === 'signup' && (
+          <input
+            type="password"
+            placeholder="비밀번호 확인"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            autoComplete="new-password"
+          />
+        )}
         {error && <div className="login-error">{error}</div>}
         <button type="submit" disabled={busy}>
           {busy ? '...' : mode === 'login' ? '로그인' : '가입하기'}
@@ -68,6 +82,7 @@ export function LoginPage() {
           onClick={() => {
             setMode(mode === 'login' ? 'signup' : 'login');
             setError(null);
+            setPasswordConfirm('');
           }}
         >
           {mode === 'login' ? '계정이 없으신가요? 회원가입' : '이미 계정이 있으신가요? 로그인'}
