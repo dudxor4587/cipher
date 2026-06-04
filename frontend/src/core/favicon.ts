@@ -1,5 +1,8 @@
 // 테마별 파비콘(브랜드 위장). 탭 제목과 함께 바뀌어 진짜 그 AI 도구처럼 보이게 한다.
 const SVGS: Record<string, string> = {
+  // cipher — 로그인 전 중립 아이콘(자물쇠). 브랜드 노출 없음.
+  cipher:
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M8 10V7a4 4 0 0 1 8 0v3' fill='none' stroke='#6b7280' stroke-width='2.2' stroke-linecap='round'/><rect x='4.5' y='10' width='15' height='10.5' rx='2.5' fill='#6b7280'/><circle cx='12' cy='14.6' r='1.5' fill='#fff'/><rect x='11.25' y='14.6' width='1.5' height='3.2' rx='.7' fill='#fff'/></svg>",
   // Claude — 코랄 선버스트(별표)
   claude:
     "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g stroke='#d97757' stroke-width='2.4' stroke-linecap='round'><line x1='12' y1='2.5' x2='12' y2='21.5'/><line x1='2.5' y1='12' x2='21.5' y2='12'/><line x1='5.2' y1='5.2' x2='18.8' y2='18.8'/><line x1='18.8' y1='5.2' x2='5.2' y2='18.8'/></g></svg>",

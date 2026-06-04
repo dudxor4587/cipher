@@ -15,11 +15,17 @@ export default function App() {
     bootstrap();
   }, [bootstrap]);
 
-  // 테마에 맞춰 파비콘 + 탭 제목 (로그인 화면 포함). 위장: 진짜 그 AI 도구처럼 보이게.
+  // 로그인 전(공개 화면)은 중립 'cipher'(자물쇠) — 브랜드 노출 없음.
+  // 로그인 후에만 테마 브랜드로 위장(파비콘·탭 제목).
   useEffect(() => {
-    setFavicon(themeKey);
-    document.title = getTheme(themeKey).label;
-  }, [themeKey]);
+    if (token) {
+      setFavicon(themeKey);
+      document.title = getTheme(themeKey).label;
+    } else {
+      setFavicon('cipher');
+      document.title = 'cipher';
+    }
+  }, [token, themeKey]);
 
   const toggleDark = () => {
     setDarkMode((prev) => {
