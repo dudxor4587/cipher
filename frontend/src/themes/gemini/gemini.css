@@ -12,6 +12,7 @@
   --pill: #d3e3fd;
   --pill-text: #041e49;
   --accent: #1b72e8;
+  --accent-contrast: #ffffff;
   --grad: linear-gradient(74deg, #4285f4 0%, #9168e6 48%, #d96570 100%);
 
   font-family: "Google Sans", Roboto, -apple-system, "Segoe UI", sans-serif;
@@ -28,7 +29,8 @@
   --hover: #2a2b2d;
   --pill: #004a77;
   --pill-text: #c2e7ff;
-  --accent: #a8c7fa;
+  --accent: #4285f4;
+  --accent-contrast: #ffffff;
 }
 
 /* ── root layout ─────────────────────────────── */
@@ -100,7 +102,7 @@
   border-radius: 9999px;
   background: var(--hover);
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
@@ -137,7 +139,7 @@
   border-radius: 9999px;
   background: transparent;
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.15s;
@@ -177,7 +179,7 @@
 }
 
 .gm-section-head {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--muted);
   font-weight: 500;
   padding: 8px 16px 6px;
@@ -190,7 +192,7 @@
 }
 
 .gm-empty-list {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--muted);
   padding: 10px 16px;
 }
@@ -232,13 +234,13 @@
   flex: 1;
 }
 .gm-item-title {
-  font-size: 16px;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .gm-item-preview {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -274,7 +276,7 @@
   border-radius: 9999px;
   background: var(--hover);
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -282,7 +284,7 @@
   filter: brightness(0.97);
 }
 .gm-plus {
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -309,7 +311,7 @@
   justify-content: center;
   background: var(--grad);
   color: #fff;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
 }
 .gm-friend-meta {
@@ -319,7 +321,7 @@
   flex: 1;
 }
 .gm-friend-name {
-  font-size: 16px;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -327,10 +329,10 @@
 .gm-friend-name small {
   color: var(--muted);
   margin-left: 3px;
-  font-size: 12px;
+  font-size: 10px;
 }
 .gm-friend-status {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -342,7 +344,7 @@
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 11px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -384,12 +386,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 16px;
+  font-size: 13px;
   min-width: 0;
 }
 .gm-profile-meta small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10px;
 }
 .gm-footer-row {
   display: flex;
@@ -403,10 +405,16 @@
   height: 34px;
   border: 1px solid var(--border);
   border-radius: 9999px;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  background-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
   color: var(--text);
-  font-size: 14px;
-  padding: 0 10px;
+  font-size: 11px;
+  padding: 0 32px 0 14px;
   cursor: pointer;
   font-family: inherit;
 }
@@ -419,7 +427,7 @@
   background: transparent;
   color: var(--text);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 13px;
   transition: background 0.15s;
 }
 .gm-icon-btn:hover {
@@ -444,7 +452,7 @@
   padding: 0 20px;
 }
 .gm-room-name {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text);
   padding: 0 4px;
@@ -467,7 +475,7 @@
   background: var(--hover);
 }
 .gm-wordmark {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
   background: var(--grad);
   -webkit-background-clip: text;
@@ -476,7 +484,7 @@
 }
 .gm-caret {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10px;
 }
 .gm-manage {
   width: 40px;
@@ -516,7 +524,7 @@
   width: 100%;
 }
 .gm-greeting {
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 500;
   margin: 0;
   background: var(--grad);
@@ -526,7 +534,7 @@
   line-height: 1.15;
 }
 .gm-greeting-sub {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 500;
   margin: 4px 0 0;
   color: var(--muted);
@@ -535,7 +543,7 @@
 /* ── messages ────────────────────────────────── */
 .gm-msg-system {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
   padding: 4px 0;
 }
@@ -552,7 +560,7 @@
   color: var(--text);
   padding: 12px 18px;
   border-radius: 20px;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
@@ -572,13 +580,13 @@
   min-width: 0;
 }
 .gm-msg-sender {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--muted);
   margin-bottom: 4px;
 }
 .gm-msg-text {
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.75;
   color: var(--text);
   white-space: pre-wrap;
@@ -640,7 +648,7 @@
   border-radius: 50%;
   background: transparent;
   color: var(--muted);
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1;
   cursor: pointer;
   transition: background 0.15s;
@@ -657,7 +665,7 @@
   resize: none;
   color: var(--text);
   font-family: inherit;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 9px 4px;
   max-height: 180px;
@@ -706,7 +714,7 @@
 }
 .gm-disclaimer {
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
   margin-top: 8px;
 }

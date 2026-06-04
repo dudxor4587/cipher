@@ -31,7 +31,7 @@
   height: 100vh; width: 100%; max-width: 100%;
   font-family: var(--font);
   background: var(--bg); color: var(--text);
-  font-size: 17px; overflow: hidden;
+  font-size: 14px; overflow: hidden;
 }
 
 /* ===== 세션 탭 바 ===== */
@@ -42,7 +42,7 @@
 }
 .cli-iconbtn {
   background: transparent; border: none; color: var(--muted);
-  cursor: pointer; font-family: inherit; border-radius: 6px; padding: 4px 9px; font-size: 17px; flex-shrink: 0;
+  cursor: pointer; font-family: inherit; border-radius: 6px; padding: 4px 9px; font-size: 14px; flex-shrink: 0;
   margin-bottom: 5px;
 }
 .cli-iconbtn:hover { color: var(--accent); background: var(--hover); }
@@ -50,7 +50,7 @@
 .cli-tab {
   display: flex; align-items: center; gap: 7px;
   background: transparent; border: 1px solid transparent; border-bottom: none; color: var(--muted);
-  cursor: pointer; font-family: inherit; font-size: 17px;
+  cursor: pointer; font-family: inherit; font-size: 14px;
   padding: 7px 14px; border-radius: 7px 7px 0 0; white-space: nowrap; max-width: 220px;
   position: relative; top: 1px;
 }
@@ -58,7 +58,7 @@
 .cli-tab:hover { color: var(--text); }
 .cli-tab.active { color: var(--text); background: var(--bg); border-color: var(--border); }
 .cli-tab .udot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.cli-tab .kbd { color: var(--muted); font-size: 10.5px; opacity: 0.6; }
+.cli-tab .kbd { color: var(--muted); font-size: 9px; opacity: 0.6; }
 .cli-tabs .newtab { margin-bottom: 4px; padding: 4px 10px; }
 
 /* ===== 본문 ===== */
@@ -103,7 +103,7 @@
 .cli-pwline { display: flex; align-items: center; margin-bottom: 16px; }
 .cli-pwline .grow { flex: 1; }
 /* 파워라인 세그먼트 — clip-path 로 화살표 모양(한 덩어리라 높이가 항상 동일) */
-.pseg { height: 24px; display: inline-flex; align-items: center; color: #ffffff; font-size: 13px; }
+.pseg { height: 24px; display: inline-flex; align-items: center; color: #ffffff; font-size: 10px; }
 /* 왼쪽 프롬프트: 오른쪽으로 뾰족 (~) */
 .pseg.dir {
   background: #2f6fed; padding: 0 15px 0 12px;
@@ -128,11 +128,11 @@
 /* Claude Code 시작화면 인트로 */
 .cli-intro { display: flex; gap: 22px; align-items: center; margin: 8px 0 16px; }
 .cli-mascot {
-  color: #d97757; font-size: 17px; line-height: 1.0; margin: 0; white-space: pre; letter-spacing: 0;
+  color: #d97757; font-size: 14px; line-height: 1.0; margin: 0; white-space: pre; letter-spacing: 0;
   display: inline-block; transform: scaleY(1.35); transform-origin: center;
 }
 .cli-intro-text { line-height: 1.7; min-width: 0; }
-.cli-intro-title { color: var(--text); font-size: 17px; }
+.cli-intro-title { color: var(--text); font-size: 14px; }
 .cli-intro-title b { font-weight: 700; }
 .cli-path { color: var(--muted); text-decoration: underline; }
 .cli-tip { border-left: 3px solid #d97757; padding-left: 14px; color: var(--text); line-height: 1.6; }
@@ -140,7 +140,7 @@
 
 /* ===== 하단 프롬프트 (Claude Code 박스) ===== */
 .cli-composer { padding: 6px 14px 14px; overflow-x: hidden; }
-.cli-status { color: var(--text); font-size: 11.5px; margin: 0 4px 6px; }
+.cli-status { color: var(--text); font-size: 9px; margin: 0 4px 6px; }
 .cli-box {
   display: flex; align-items: center; gap: 10px;
   border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px;
@@ -148,7 +148,7 @@
 }
 .cli-box:focus-within { border-color: var(--muted); }
 .cli-box .ps { color: var(--text); flex-shrink: 0; }
-.cli-hint { font-size: 17px; margin: 7px 4px 0; }
+.cli-hint { font-size: 14px; margin: 7px 4px 0; }
 .cli-hint .ae { color: #c386e6; }
 
 /* contentEditable 터미널 입력: form 컨트롤이 아니라 네이티브 스크롤바가 없음.
@@ -156,7 +156,7 @@
 .cli-edit {
   flex: 1; min-width: 0; min-height: 1.2em; max-height: 40vh; line-height: 1.2em;
   white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; overflow-y: auto;
-  outline: none; color: var(--text); caret-color: transparent; font-size: 17px;
+  outline: none; color: var(--text); caret-color: transparent; font-size: 14px;
 }
 .cli-edit.on::after {
   content: ''; display: inline-block; width: 0.6ch; height: 1.05em;
@@ -179,27 +179,27 @@
 
 .cli-cmd {
   text-align: left; background: transparent; border: 1px dashed var(--border); color: var(--muted);
-  cursor: pointer; padding: 9px 10px; font-family: inherit; font-size: 15px; border-radius: 6px;
+  cursor: pointer; padding: 9px 10px; font-family: inherit; font-size: 12px; border-radius: 6px;
 }
 .cli-cmd:hover { color: var(--accent); border-color: var(--accent); }
 .cli-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1px; margin-top: 8px; }
 .cli-friend {
   display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px;
-  background: transparent; border: none; cursor: pointer; font-family: inherit; font-size: 17px;
+  background: transparent; border: none; cursor: pointer; font-family: inherit; font-size: 14px;
   color: var(--text); text-align: left;
 }
 .cli-friend:hover { background: var(--hover); }
-.cli-friend .dot { color: var(--muted); flex-shrink: 0; font-size: 10px; }
+.cli-friend .dot { color: var(--muted); flex-shrink: 0; font-size: 9px; }
 .cli-friend .label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cli-friend .rm { border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 11px; opacity: 0; }
+.cli-friend .rm { border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 9px; opacity: 0; }
 .cli-friend:hover .rm { opacity: 1; }
 .cli-friend .rm:hover { color: var(--accent); }
 
 .cli-foot { border-top: 1px solid var(--border); padding-top: 10px; margin-top: 8px; display: flex; flex-direction: column; gap: 7px; }
-.cli-me { text-align: left; background: transparent; border: none; color: var(--text); cursor: pointer; font-family: inherit; font-size: 16px; padding: 4px 4px; }
+.cli-me { text-align: left; background: transparent; border: none; color: var(--text); cursor: pointer; font-family: inherit; font-size: 13px; padding: 4px 4px; }
 .cli-me:hover { color: var(--accent); }
 .cli-foot-row { display: flex; gap: 6px; align-items: center; }
-.cli-foot-row select { flex: 1; background: var(--bg); color: var(--text); border: 1px solid var(--border); font-family: inherit; font-size: 14px; height: 34px; padding: 0 10px; border-radius: 6px; }
-.cli-foot-row button { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-family: inherit; border-radius: 6px; padding: 0; font-size: 24px; line-height: 1; }
-.cli-foot-row button.pw { font-size: 15px; }
+.cli-foot-row select { flex: 1; background: var(--bg); color: var(--text); border: 1px solid var(--border); font-family: inherit; font-size: 11px; height: 34px; padding: 0 10px; border-radius: 6px; }
+.cli-foot-row button { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); cursor: pointer; font-family: inherit; border-radius: 6px; padding: 0; font-size: 19px; line-height: 1; }
+.cli-foot-row button.pw { font-size: 12px; }
 .cli-foot-row button:hover { color: var(--accent); }

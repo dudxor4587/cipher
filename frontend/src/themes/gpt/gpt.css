@@ -13,6 +13,8 @@
   --send-fg: #ffffff;
   --composer: #ffffff;
   --composer-border: #d9d9d9;
+  --accent: #0d0d0d;
+  --accent-contrast: #ffffff;
 }
 
 .theme-gpt.dark {
@@ -27,6 +29,8 @@
   --send-fg: #0d0d0d;
   --composer: #303030;
   --composer-border: #424242;
+  --accent: #ffffff;
+  --accent-contrast: #0d0d0d;
 }
 
 .theme-gpt {
@@ -117,7 +121,7 @@
   border-radius: 8px;
   background: transparent;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.12s ease, color 0.12s ease;
@@ -142,7 +146,7 @@
 .gpt-list-empty {
   padding: 16px 12px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 11px;
 }
 
 .gpt-room {
@@ -155,7 +159,7 @@
   border-radius: 8px;
   background: transparent;
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   text-align: left;
   cursor: pointer;
   transition: background 0.12s ease;
@@ -191,7 +195,7 @@
   border-radius: 8px;
   background: transparent;
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   cursor: pointer;
   transition: background 0.12s ease;
 }
@@ -218,18 +222,18 @@
   flex-direction: column;
 }
 .gpt-friend-name {
-  font-size: 16px;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .gpt-friend-name small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 9px;
   margin-left: 3px;
 }
 .gpt-friend-status {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -239,7 +243,7 @@
   border: none;
   background: transparent;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10px;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.12s ease, color 0.12s ease;
@@ -265,7 +269,7 @@
 .gpt-avatar-sm {
   width: 28px;
   height: 28px;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 /* sidebar footer */
@@ -290,7 +294,7 @@
   background: var(--hover);
 }
 .gpt-profile-name {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -299,7 +303,7 @@
 .gpt-profile-name small {
   color: var(--muted);
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   margin-left: 3px;
 }
 .gpt-footer-row {
@@ -312,12 +316,18 @@
   flex: 1;
   min-width: 0;
   height: 34px;
-  padding: 0 10px;
+  padding: 0 30px 0 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
   color: var(--text);
-  font-size: 14px;
+  font-size: 11px;
   cursor: pointer;
 }
 
@@ -343,7 +353,7 @@
   padding-left: 96px; /* 좌상단 rail 자리 확보 */
 }
 .gpt-room-name {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text);
   padding: 6px 4px;
@@ -360,7 +370,7 @@
   border-radius: 8px;
   background: transparent;
   color: var(--text);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.12s ease;
@@ -393,7 +403,7 @@
 }
 .gpt-empty h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -403,7 +413,7 @@
 .gpt-system {
   text-align: center;
   color: var(--muted);
-  font-size: 12.5px;
+  font-size: 10px;
   padding: 2px 0;
 }
 
@@ -421,7 +431,7 @@
   border-radius: 1.5rem;
   background: var(--user-bubble);
   color: var(--text);
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
@@ -451,14 +461,14 @@
   margin-top: 1px;
 }
 .gpt-sender {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--muted);
   margin-bottom: 4px;
 }
 .gpt-assistant-text {
   width: 100%;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.75;
   color: var(--text);
   white-space: pre-wrap;
@@ -544,7 +554,7 @@
   background: transparent;
   color: var(--text);
   font-family: inherit;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 7px 2px;
   max-height: 200px;
@@ -574,6 +584,6 @@
 .gpt-disclaimer {
   margin: 8px 0 0;
   text-align: center;
-  font-size: 11.5px;
+  font-size: 9px;
   color: var(--muted);
 }
