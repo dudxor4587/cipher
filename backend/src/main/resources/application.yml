@@ -7,9 +7,6 @@ spring:
     active: dev
 
   jpa:
-    properties:
-      hibernate:
-        format_sql: true
     open-in-view: false
 
 server:
@@ -19,6 +16,4 @@ cipher:
   jwt:
     validity-ms: 86400000   # 24h
 
-logging:
-  level:
-    org.hibernate.SQL: debug
+# SQL 로그는 dev 프로파일에서만 출력(application-dev.yml). prod 는 출력 안 함.

@@ -443,6 +443,15 @@
   justify-content: space-between;
   padding: 0 20px;
 }
+.gm-room-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .gm-model {
   display: inline-flex;
   align-items: center;

@@ -10,9 +10,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
 
 cipher:
   jwt:
     secret: cipher-dev-secret-key-please-change-me-in-prod-0123456789
   aes:
     key: cipher-dev-aes-key-change-me-in-prod
+
+# SQL 로그는 개발에서만
+logging:
+  level:
+    org.hibernate.SQL: debug

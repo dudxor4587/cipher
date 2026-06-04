@@ -41,7 +41,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("*"));
+        // 허용 출처 명시 (전체 개방 금지). 운영=Vercel, 개발=로컬 Vite.
+        config.setAllowedOrigins(List.of(
+                "https://cipher-assistant.vercel.app",
+                "http://localhost:5173"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

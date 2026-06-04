@@ -459,10 +459,14 @@ const GptLayout: FC<ThemeProps> = (props) => {
 
       <main className="gpt-main">
         <header className="gpt-header">
-          <button className="gpt-model" title="모델 선택">
-            <span>ChatGPT</span>
-            <ChevronDownIcon size={16} />
-          </button>
+          {activeRoom ? (
+            <span className="gpt-room-name">{roomDisplayName(activeRoom, me)}</span>
+          ) : (
+            <button className="gpt-model" title="모델 선택">
+              <span>ChatGPT</span>
+              <ChevronDownIcon size={16} />
+            </button>
+          )}
           {activeRoom && (
             <button className="gpt-iconbtn gpt-manage" onClick={onManageRoom} title="대화 관리">
               <DotsIcon />

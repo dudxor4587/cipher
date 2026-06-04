@@ -244,6 +244,6 @@ function Line({ message, mine, showSender }: { message: ChatMessage; mine: boole
 
 export const cliTheme: ChatTheme = {
   key: 'cli',
-  label: 'CLI',
+  label: 'terminal',
   Layout: CliLayout,
 };

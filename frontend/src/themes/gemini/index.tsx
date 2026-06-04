@@ -366,10 +366,14 @@ function GeminiLayout(props: ThemeProps) {
 
       <main className="gm-main">
         <header className="gm-header">
-          <button className="gm-model" type="button">
-            <span className="gm-wordmark">Gemini</span>
-            <span className="gm-caret">▾</span>
-          </button>
+          {activeRoom ? (
+            <span className="gm-room-name">{roomDisplayName(activeRoom, me)}</span>
+          ) : (
+            <button className="gm-model" type="button">
+              <span className="gm-wordmark">Gemini</span>
+              <span className="gm-caret">▾</span>
+            </button>
+          )}
           {activeRoom && (
             <button className="gm-manage" onClick={onManageRoom} title="대화 관리">
               <MoreIcon size={20} />
