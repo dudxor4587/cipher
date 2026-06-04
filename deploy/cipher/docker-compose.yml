@@ -37,6 +37,8 @@ services:
       CIPHER_AES_KEY: ${CIPHER_AES_KEY}
     expose:
       - "8080"
+    volumes:
+      - ./logs:/app/logs      # 호스트 ~/cipher-deploy/logs 로 로그 노출/영속
     # 공용 엣지 프록시(oracle-ampere/edge)가 이 라벨을 읽어 자동 라우팅 + HTTPS
     labels:
       caddy: cipher.134.185.100.62.sslip.io
