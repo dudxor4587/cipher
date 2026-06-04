@@ -1,40 +1,54 @@
 .login-wrap {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f4ef;
+  background: #0f0f11;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .login-card {
   width: 320px;
-  background: #fff;
-  border: 1px solid #e8e3d9;
+  background: #1a1a1d;
+  border: 1px solid #2a2a2e;
   border-radius: 16px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
-.login-card h1 { margin: 0; font-size: 28px; color: #d97757; text-align: center; }
-.login-sub { margin: 0 0 8px; text-align: center; color: #9b948a; font-size: 14px; }
+.login-card h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #d7d7db;
+  text-align: center;
+}
+.login-sub { margin: 0 0 8px; text-align: center; color: #7c7c82; font-size: 14px; }
 .login-card input {
   padding: 12px;
-  border: 1px solid #e8e3d9;
+  border: 1px solid #2f2f34;
   border-radius: 10px;
   font-size: 15px;
   outline: none;
+  background: #222225;
+  color: #e4e4e6;
 }
-.login-card input:focus { border-color: #d97757; }
+.login-card input::placeholder { color: #66666c; }
+.login-card input:focus { border-color: #4a4a52; }
 .login-card button[type='submit'] {
   padding: 12px;
-  border: none;
+  border: 1px solid #4d4d56;
   border-radius: 10px;
-  background: #d97757;
-  color: #fff;
+  background: #3d3d45;
+  color: #f0f0f2;
   font-size: 15px;
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
-.login-switch { background: none; border: none; color: #9b948a; cursor: pointer; font-size: 13px; }
-.login-error { color: #c0392b; font-size: 13px; text-align: center; }
+.login-card button[type='submit']:hover { background: #4a4a53; border-color: #5a5a64; }
+.login-switch { background: none; border: none; color: #7c7c82; cursor: pointer; font-size: 13px; }
+.login-switch:hover { color: #cfcfd3; }
+.login-error { color: #d98a8a; font-size: 13px; text-align: center; }
