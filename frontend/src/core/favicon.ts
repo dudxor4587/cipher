@@ -20,12 +20,11 @@ const SVGS: Record<string, string> = {
 export function setFavicon(themeKey: string) {
   const svg = SVGS[themeKey] ?? SVGS.claude;
   const href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
-  let link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
-  if (!link) {
-    link = document.createElement('link');
-    link.rel = 'icon';
-    document.head.appendChild(link);
-  }
+  // 사파리 대응: href 만 바꾸면 갱신을 안 하는 경우가 많아, 기존 아이콘 링크를 지우고 새로 만든다.
+  document.querySelectorAll("link[rel~='icon']").forEach((el) => el.remove());
+  const link = document.createElement('link');
+  link.rel = 'icon';
   link.type = 'image/svg+xml';
   link.href = href;
+  document.head.appendChild(link);
 }
