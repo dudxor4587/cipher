@@ -9,3 +9,4 @@
 .vercel
 
 # backend / frontend 는 각 디렉토리의 .gitignore 참고
+.env.prod

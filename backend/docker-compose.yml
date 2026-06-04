@@ -1,5 +1,4 @@
-# 로컬 개발용 PostgreSQL. `docker compose up -d` 로 띄우고,
-# 앱은 `--spring.profiles.active=postgres` 로 실행하면 여기 붙는다.
+# 로컬 개발용 PostgreSQL.
 services:
   postgres:
     image: postgres:16
