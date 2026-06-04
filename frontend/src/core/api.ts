@@ -8,7 +8,8 @@ import type {
   UserSummary,
 } from './types';
 
-const baseURL = import.meta.env.VITE_API_URL ?? '/api';
+// dev: Vite 프록시(/api) · prod: 배포 백엔드 직접
+const baseURL = import.meta.env.PROD ? 'https://cipher.134.185.100.62.sslip.io/api' : '/api';
 
 export const api = axios.create({ baseURL });
 

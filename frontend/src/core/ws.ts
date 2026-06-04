@@ -2,7 +2,8 @@ import { Client, type IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import type { ChatMessage } from './types';
 
-const wsUrl = import.meta.env.VITE_WS_URL ?? '/ws';
+// dev: Vite 프록시(/ws) · prod: 배포 백엔드 직접
+const wsUrl = import.meta.env.PROD ? 'https://cipher.134.185.100.62.sslip.io/ws' : '/ws';
 
 /**
  * STOMP 클라이언트 래퍼.
