@@ -116,11 +116,12 @@ public class RoomService {
         if (room.getType() == RoomType.DIRECT) {
             room.promoteToGroup();
         }
+        LocalDateTime invitedAt = LocalDateTime.now();
         for (UUID userId : userIds) {
             User u = getUser(userId);
-            // 이미 멤버면(나갔던 경우 포함) 재합류, 아니면 새로 추가
+            // 이미 멤버면(나갔던 경우 포함) 재합류하되 가시성은 초대 시점부터(이전 기록·자기 퇴장 메시지 숨김), 아니면 새로 추가
             memberRepository.findByRoomAndUser(room, u)
-                    .ifPresentOrElse(RoomMember::rejoin, () -> addMember(room, userId));
+                    .ifPresentOrElse(m -> m.rejoinFresh(invitedAt), () -> addMember(room, userId));
             notifyRoomChanged(userId, room.getId()); // 초대받은 사람에게 실시간 알림
             postSystemMessage(room, requester.getDisplayName() + "님이 " + u.getDisplayName() + "님을 초대했습니다.");
         }

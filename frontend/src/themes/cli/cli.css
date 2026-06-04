@@ -41,25 +41,26 @@
   border-bottom: 1px solid var(--border); flex-shrink: 0;
 }
 .cli-iconbtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 30px; box-sizing: border-box;
   background: transparent; border: none; color: var(--muted);
-  cursor: pointer; font-family: inherit; border-radius: 6px; padding: 4px 9px; font-size: 14px; flex-shrink: 0;
-  margin-bottom: 5px;
+  cursor: pointer; font-family: inherit; border-radius: 6px; padding: 0 9px; font-size: 14px; line-height: 1; flex-shrink: 0;
 }
 .cli-iconbtn:hover { color: var(--accent); background: var(--hover); }
 .cli-tabs { display: flex; gap: 2px; flex: 1; overflow-x: auto; overflow-y: hidden; align-items: flex-end; }
 .cli-tab {
   display: flex; align-items: center; gap: 7px;
+  height: 30px; box-sizing: border-box;
   background: transparent; border: 1px solid transparent; border-bottom: none; color: var(--muted);
   cursor: pointer; font-family: inherit; font-size: 14px;
-  padding: 7px 14px; border-radius: 7px 7px 0 0; white-space: nowrap; max-width: 220px;
-  position: relative; top: 1px;
+  padding: 0 14px; border-radius: 7px 7px 0 0; white-space: nowrap; max-width: 220px;
 }
 .cli-tab .name { overflow: hidden; text-overflow: ellipsis; }
 .cli-tab:hover { color: var(--text); }
 .cli-tab.active { color: var(--text); background: var(--bg); border-color: var(--border); }
 .cli-tab .udot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 .cli-tab .kbd { color: var(--muted); font-size: 9px; opacity: 0.6; }
-.cli-tabs .newtab { margin-bottom: 4px; padding: 4px 10px; }
+.cli-tabs .newtab { padding: 0 10px; position: relative; top: 1px; }
 
 /* ===== 본문 ===== */
 .cli-main { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; }

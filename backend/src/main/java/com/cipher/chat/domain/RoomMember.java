@@ -61,4 +61,10 @@ public class RoomMember extends BaseEntity {
     public void rejoin() {
         this.leftAt = null;
     }
+
+    /** 단체방 재초대로 다시 합류 — 가시성 컷오프를 초대 시점으로 옮김(자기 퇴장 메시지·이전 기록 안 보이게). */
+    public void rejoinFresh(LocalDateTime at) {
+        this.leftAt = null;
+        this.messagesVisibleFrom = at;
+    }
 }
