@@ -5,10 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Component;
 
-/**
- * 인메모리 고정 윈도우 레이트리밋 (MVP·단일 인스턴스용).
- * 다중 인스턴스로 확장 시 Redis(INCR+EXPIRE)나 Bucket4j-Redis 로 교체.
- */
 @Component
 public class RateLimiter {
 
@@ -16,7 +12,6 @@ public class RateLimiter {
 
     private final ConcurrentHashMap<String, Window> buckets = new ConcurrentHashMap<>();
 
-    /** key 에 대해 windowMs 동안 limit 회까지 허용. 초과 시 RateLimitExceededException. */
     public void check(String key, int limit, long windowMs) {
         long now = System.currentTimeMillis();
         Window window = buckets.compute(key, (k, cur) ->

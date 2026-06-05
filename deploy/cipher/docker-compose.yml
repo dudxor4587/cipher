@@ -35,6 +35,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       CIPHER_JWT_SECRET: ${CIPHER_JWT_SECRET}
       CIPHER_AES_KEY: ${CIPHER_AES_KEY}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY}
     expose:
       - "8080"
     volumes:

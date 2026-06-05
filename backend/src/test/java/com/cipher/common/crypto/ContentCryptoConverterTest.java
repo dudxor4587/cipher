@@ -23,7 +23,7 @@ class ContentCryptoConverterTest {
         String a = converter.convertToDatabaseColumn(plain);
         String b = converter.convertToDatabaseColumn(plain);
 
-        assertThat(a).isNotEqualTo(b); // IV 가 매번 달라 암호문도 다름
+        assertThat(a).isNotEqualTo(b);
         assertThat(converter.convertToEntityAttribute(a)).isEqualTo(plain);
         assertThat(converter.convertToEntityAttribute(b)).isEqualTo(plain);
     }

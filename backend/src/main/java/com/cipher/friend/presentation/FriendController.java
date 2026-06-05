@@ -35,12 +35,11 @@ public class FriendController {
     @PostMapping
     public ResponseEntity<UserSummary> add(@AuthenticationPrincipal UUID userId,
                                            @Valid @RequestBody AddFriendRequest request) {
-        // 태그(4자리) 무차별 대입 방지: 계정당 시간당 20회
+
         rateLimiter.check("friend-add:" + userId, 20, Duration.ofHours(1).toMillis());
         return ResponseEntity.ok(friendService.addByHandle(userId, request.handle()));
     }
 
-    /** 같은 방 멤버를 userId 로 바로 추가 (멤버 목록의 "친구 추가" 버튼). */
     @PostMapping("/by-user/{targetId}")
     public ResponseEntity<UserSummary> addByUser(@AuthenticationPrincipal UUID userId,
                                                  @PathVariable UUID targetId) {

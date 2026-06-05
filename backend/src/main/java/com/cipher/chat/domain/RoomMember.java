@@ -33,13 +33,10 @@ public class RoomMember extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    /** 이 멤버가 마지막으로 읽은 시점. null = 아직 아무것도 안 읽음. (UUID PK라 메시지 id로 비교 불가 → 시각 기준) */
     private LocalDateTime lastReadAt;
 
-    /** 방을 나간 시점. null = 활성 멤버. (소프트 나가기 — 남은 사람 표시·재등장을 위해 삭제하지 않음) */
     private LocalDateTime leftAt;
 
-    /** 이 시점 이후 메시지만 보임. null = 처음부터. (나간 뒤 재등장 시 이전 기록을 숨기기 위함, 카톡식) */
     private LocalDateTime messagesVisibleFrom;
 
     public void updateLastRead(LocalDateTime readAt) {
@@ -54,15 +51,13 @@ public class RoomMember extends BaseEntity {
 
     public void leave(LocalDateTime at) {
         this.leftAt = at;
-        this.messagesVisibleFrom = at; // 나간 시점 이전 기록은 안 보이게
+        this.messagesVisibleFrom = at;
     }
 
-    /** 상대가 메시지를 보내 다시 합류(1:1에서 나간 사람 재등장). 가시성 컷오프는 유지 → 나간 이후만 보임. */
     public void rejoin() {
         this.leftAt = null;
     }
 
-    /** 단체방 재초대로 다시 합류 — 가시성 컷오프를 초대 시점으로 옮김(자기 퇴장 메시지·이전 기록 안 보이게). */
     public void rejoinFresh(LocalDateTime at) {
         this.leftAt = null;
         this.messagesVisibleFrom = at;

@@ -14,6 +14,13 @@ cipher:
   aes:
     key: test-aes-key
 
+vapid:
+  public:
+    key: BAEOSUv4QV0CnjNzJCjCn9EqECu4RYFLg9u9FtZ8hoH5QIGahORl69fpQuAo6WQFix061hyYmpFfeDtQqYsPmCw
+  private:
+    key: 3goNJm1GBp0882oF1ZDArGdeTVHbuSMoU1SPtPc0ldo
+  subject: https://cipher.134.185.100.62.sslip.io
+
 logging:
   level:
     org.hibernate.SQL: warn

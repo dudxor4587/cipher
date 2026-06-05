@@ -509,6 +509,11 @@
   gap: 13px;
   align-items: flex-start;
 }
+.cl-time {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+}
 .cl-msg-logo {
   flex: 0 0 auto;
   display: inline-flex;

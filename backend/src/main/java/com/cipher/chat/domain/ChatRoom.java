@@ -34,7 +34,6 @@ public class ChatRoom extends BaseEntity {
         return type == RoomType.GROUP;
     }
 
-    /** 1:1 방에 멤버를 초대하면 단체방으로 승격. */
     public void promoteToGroup() {
         this.type = RoomType.GROUP;
     }

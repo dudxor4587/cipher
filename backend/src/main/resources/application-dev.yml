@@ -24,3 +24,11 @@ cipher:
 logging:
   level:
     org.hibernate.SQL: debug
+
+# 웹푸시 VAPID (개발용 키 — prod 는 환경변수)
+vapid:
+  public:
+    key: BAEOSUv4QV0CnjNzJCjCn9EqECu4RYFLg9u9FtZ8hoH5QIGahORl69fpQuAo6WQFix061hyYmpFfeDtQqYsPmCw
+  private:
+    key: 3goNJm1GBp0882oF1ZDArGdeTVHbuSMoU1SPtPc0ldo
+  subject: https://cipher.134.185.100.62.sslip.io

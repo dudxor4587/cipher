@@ -6,7 +6,6 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-/** 통합 테스트 공통 베이스: 실제 PostgreSQL 컨테이너를 띄워 검증. */
 @SpringBootTest
 @ActiveProfiles("test")
 public abstract class BaseTest {

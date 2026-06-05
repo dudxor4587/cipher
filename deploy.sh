@@ -11,16 +11,37 @@ REMOTE=/home/ubuntu/cipher-deploy
 SITE=cipher.134.185.100.62.sslip.io
 SSH=(ssh -i "$KEY" -o StrictHostKeyChecking=accept-new)
 
-echo "▶ 1/3  원격 준비 (디렉터리 / edge 네트워크 확인 / .env.prod 시크릿)"
-"${SSH[@]}" "$SERVER" "
-  mkdir -p $REMOTE
-  docker network inspect edge >/dev/null 2>&1 || docker network create edge
-  if [ ! -f $REMOTE/.env.prod ]; then
+echo "▶ 1/3  원격 준비 (디렉터리 / edge 네트워크 / .env.prod 시크릿·VAPID)"
+"${SSH[@]}" "$SERVER" 'bash -s' <<'REMOTE_EOF'
+set -e
+REMOTE=/home/ubuntu/cipher-deploy
+mkdir -p "$REMOTE"
+docker network inspect edge >/dev/null 2>&1 || docker network create edge
+
+# VAPID(P-256) 키쌍을 base64url 로 생성 → 웹푸시용
+gen_vapid() {
+  local pem priv pub
+  pem=$(openssl ecparam -genkey -name prime256v1 -noout)
+  priv=$(printf '%s' "$pem" | openssl ec -outform DER 2>/dev/null | tail -c +8 | head -c 32 | base64 | tr -d '=' | tr '/+' '_-')
+  pub=$(printf '%s'  "$pem" | openssl ec -pubout -outform DER 2>/dev/null | tail -c 65 | base64 | tr -d '=' | tr '/+' '_-')
+  printf 'VAPID_PUBLIC_KEY=%s\nVAPID_PRIVATE_KEY=%s\n' "$pub" "$priv"
+}
+
+if [ ! -f "$REMOTE/.env.prod" ]; then
+  {
     printf 'DB_PASSWORD=%s\nCIPHER_JWT_SECRET=%s\nCIPHER_AES_KEY=%s\n' \
-      \$(openssl rand -hex 16) \$(openssl rand -hex 32) \$(openssl rand -hex 32) > $REMOTE/.env.prod
-    chmod 600 $REMOTE/.env.prod
-    echo '   .env.prod 새로 생성(시크릿 랜덤) — cat 으로 백업해 둘 것!'
-  else echo '   .env.prod 유지'; fi"
+      "$(openssl rand -hex 16)" "$(openssl rand -hex 32)" "$(openssl rand -hex 32)"
+    gen_vapid
+  } > "$REMOTE/.env.prod"
+  chmod 600 "$REMOTE/.env.prod"
+  echo '   .env.prod 새로 생성(시크릿·VAPID 랜덤) — cat 으로 백업(옵시디언)!'
+elif ! grep -q '^VAPID_PUBLIC_KEY=' "$REMOTE/.env.prod"; then
+  gen_vapid >> "$REMOTE/.env.prod"
+  echo '   기존 .env.prod 에 VAPID 키 추가 — cat 으로 백업!'
+else
+  echo '   .env.prod 유지'
+fi
+REMOTE_EOF
 
 echo "▶ 2/3  compose + backend 소스 동기화"
 rsync -az -e "${SSH[*]}" deploy/cipher/docker-compose.yml "$SERVER:$REMOTE/"

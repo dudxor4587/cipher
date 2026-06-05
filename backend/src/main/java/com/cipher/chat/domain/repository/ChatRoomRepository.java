@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, UUID> {
 
-    /** 두 유저가 모두 속한 DIRECT 방 (1:1 중복 생성 방지용). */
     @Query("""
             select rm.room from RoomMember rm
             where rm.user.id = :a

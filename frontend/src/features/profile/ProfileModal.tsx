@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { disablePush, enablePush, pushEnabled, pushSupported } from '../../core/push';
 import { useApp } from '../../core/store';
 import '../chat/newchat.css';
 
@@ -11,8 +12,28 @@ export function ProfileModal({ onClose }: { onClose: () => void }) {
   const [displayName, setDisplayName] = useState(me.displayName);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notify, setNotify] = useState(pushEnabled());
+  const [notifyBusy, setNotifyBusy] = useState(false);
 
   void friends;
+
+  const toggleNotify = async () => {
+    setError(null);
+    setNotifyBusy(true);
+    try {
+      if (notify) {
+        await disablePush();
+        setNotify(false);
+      } else {
+        await enablePush();
+        setNotify(true);
+      }
+    } catch (e: any) {
+      setError(e?.message ?? '알림 설정에 실패했습니다.');
+    } finally {
+      setNotifyBusy(false);
+    }
+  };
 
   const save = async () => {
     setError(null);
@@ -42,6 +63,22 @@ export function ProfileModal({ onClose }: { onClose: () => void }) {
           maxLength={30}
         />
         <p className="hint">이름을 바꾸면 태그(#숫자)가 새로 부여될 수 있습니다.</p>
+
+        {pushSupported() && (
+          <label className="toggle-row">
+            <span>알림</span>
+            <button
+              type="button"
+              className={`toggle${notify ? ' on' : ''}`}
+              onClick={toggleNotify}
+              disabled={notifyBusy}
+              aria-pressed={notify}
+            >
+              <span className="toggle-knob" />
+            </button>
+          </label>
+        )}
+
         {error && <div className="error">{error}</div>}
         <div className="modal-actions">
           <button className="danger-btn" onClick={logout}>

@@ -26,7 +26,7 @@ public class UserService {
     public UserSummary updateProfile(UUID userId, UpdateProfileRequest request) {
         User user = getUser(userId);
         String newName = request.displayName();
-        // 이름이 바뀌고 (새이름, 현재태그) 가 중복되면 태그를 재할당
+
         if (newName != null && !newName.isBlank() && !newName.equals(user.getDisplayName())
                 && userRepository.existsByDisplayNameAndTag(newName, user.getTag())) {
             user.assignTag(tagAllocator.allocate(newName));

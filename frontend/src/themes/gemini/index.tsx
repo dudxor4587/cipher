@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ChatMessage } from '../../core/types';
 import { GeminiIcon } from '../icons';
 import { roomDisplayName } from '../roomName';
+import { msgTime } from '../time';
 import type { ChatTheme, ThemeProps } from '../types';
 import { VirtualMessageList } from '../VirtualMessageList';
 import './gemini.css';
@@ -134,6 +135,7 @@ function GeminiMessage({
     return (
       <div className="gm-msg gm-msg-mine">
         <div className="gm-bubble">{message.content}</div>
+        <span className="gm-time">{msgTime(message.createdAt)}</span>
       </div>
     );
   }
@@ -175,6 +177,7 @@ function GeminiMessage({
             <MoreIcon />
           </button>
         </div>
+        <span className="gm-time">{msgTime(message.createdAt)}</span>
       </div>
     </div>
   );

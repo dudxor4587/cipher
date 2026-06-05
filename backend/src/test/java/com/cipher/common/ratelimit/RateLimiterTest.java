@@ -27,7 +27,7 @@ class RateLimiterTest {
         assertThatThrownBy(() -> limiter.check(key, 1, 100))
                 .isInstanceOf(RateLimitExceededException.class);
 
-        Thread.sleep(130); // 윈도우 경과
+        Thread.sleep(130);
         assertThatCode(() -> limiter.check(key, 1, 100)).doesNotThrowAnyException();
     }
 

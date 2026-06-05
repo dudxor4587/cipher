@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { setBadge } from '../../core/push';
 import { useApp } from '../../core/store';
 import { getTheme, saveThemeKey, themeOptions } from '../../themes/registry';
 import type { SidebarTab } from '../../themes/types';
@@ -46,6 +47,10 @@ export function ChatPage({
   useEffect(() => {
     document.title = getTheme(themeKey).label;
   }, [themeKey]);
+
+  useEffect(() => {
+    void setBadge(totalUnread);
+  }, [totalUnread]);
 
   // 테마 변수(--bg, --accent 등)를 Layout 뿐 아니라 모달까지 닿게 하려면
   // 둘 다 테마 클래스를 가진 래퍼 안에 둬야 한다 (모달이 chat-root 바깥이라서).

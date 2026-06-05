@@ -570,6 +570,11 @@
   gap: 14px;
   align-items: flex-start;
 }
+.gm-time {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+}
 .gm-msg-avatar {
   flex: 0 0 auto;
   display: inline-flex;

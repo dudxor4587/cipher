@@ -14,10 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-/**
- * 단방향 행 하나 = "owner 의 친구는 friend".
- * 양방향 자동추가이므로 (a→b), (b→a) 두 행을 함께 생성/삭제한다.
- */
 @Entity
 @Table(name = "friendships", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"owner_id", "friend_id"})

@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import type { ChatMessage, UserSummary } from '../../core/types';
 import { GptIcon } from '../icons';
 import { roomDisplayName } from '../roomName';
+import { msgTime } from '../time';
 import type { ChatTheme, ThemeProps } from '../types';
 import { VirtualMessageList } from '../VirtualMessageList';
 import './gpt.css';
@@ -233,6 +234,7 @@ function GptMessage({
     return (
       <div className="gpt-turn gpt-turn-user">
         <div className="gpt-user-bubble">{message.content}</div>
+        <span className="gpt-time">{msgTime(message.createdAt)}</span>
       </div>
     );
   }
@@ -248,6 +250,7 @@ function GptMessage({
         )}
         <div className="gpt-assistant-text">{message.content}</div>
         <MessageActions content={message.content} />
+        <span className="gpt-time">{msgTime(message.createdAt)}</span>
       </div>
     </div>
   );

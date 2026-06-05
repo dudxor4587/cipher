@@ -5,7 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/** displayName 내에서 유일한 4자리 태그를 할당. 회원가입·이름변경에서 공용. */
 @Component
 @RequiredArgsConstructor
 public class TagAllocator {

@@ -29,7 +29,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<TokenResponse> signup(@Valid @RequestBody SignupRequest request,
                                                 HttpServletRequest http) {
-        // 봇 대량가입 방지: IP당 시간당 5회
+
         rateLimiter.check("signup:" + clientIp(http), 5, HOUR);
         return ResponseEntity.ok(authService.signup(request));
     }
@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest request,
                                                HttpServletRequest http) {
-        // 무차별 대입 방지: IP당 분당 10회
+
         rateLimiter.check("login:" + clientIp(http), 10, MINUTE);
         return ResponseEntity.ok(authService.login(request));
     }

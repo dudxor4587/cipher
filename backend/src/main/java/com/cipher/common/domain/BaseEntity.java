@@ -16,7 +16,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-/** 모든 엔티티 공통: UUID PK + 생성/수정 시각 자동 기록. */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Getter

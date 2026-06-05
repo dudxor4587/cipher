@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { ChatMessage } from '../../core/types';
 import { ClaudeIcon } from '../icons';
 import { roomDisplayName } from '../roomName';
+import { msgTime } from '../time';
 import type { ChatTheme, ThemeProps } from '../types';
 import { VirtualMessageList } from '../VirtualMessageList';
 import './claude.css';
@@ -136,6 +137,7 @@ function ClaudeMessage({
     return (
       <div className="cl-row cl-row-mine">
         <div className="cl-bubble">{message.content}</div>
+        <span className="cl-time">{msgTime(message.createdAt)}</span>
       </div>
     );
   }
@@ -173,6 +175,7 @@ function ClaudeMessage({
           <IconRetry />
         </button>
         </div>
+        <span className="cl-time">{msgTime(message.createdAt)}</span>
       </div>
     </div>
   );

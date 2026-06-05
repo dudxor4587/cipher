@@ -20,7 +20,6 @@ public class FriendService {
     private final UserRepository userRepository;
     private final RoomMemberRepository roomMemberRepository;
 
-    /** 이름#태그 핸들로 친구를 양방향 추가. */
     @Transactional
     public UserSummary addByHandle(UUID meId, String handle) {
         int hash = handle.lastIndexOf('#');
@@ -42,7 +41,6 @@ public class FriendService {
         return UserSummary.from(target);
     }
 
-    /** 같은 방에 함께 있는 멤버를 userId 로 바로 친구 추가 (핸들 몰라도 됨). */
     @Transactional
     public UserSummary addByUserId(UUID meId, UUID targetId) {
         if (meId.equals(targetId)) {

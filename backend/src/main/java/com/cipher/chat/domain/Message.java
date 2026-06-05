@@ -30,7 +30,6 @@ public class Message extends BaseEntity {
     @JoinColumn(name = "room_id")
     private ChatRoom room;
 
-    // 시스템 메시지(입장/퇴장 등)는 발신자가 없으므로 nullable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
     private User sender;
@@ -39,10 +38,8 @@ public class Message extends BaseEntity {
     @Column(nullable = false)
     private MessageType type;
 
-    // 본문은 AES-256-GCM 으로 암호화 저장 → 암호문(base64)이 길어지므로 컬럼도 넉넉히
     @Convert(converter = ContentCryptoConverter.class)
     @Column(nullable = false, length = 20000)
     private String content;
 
-    // 메시지 시각/정렬은 BaseEntity.createdAt(LocalDateTime) 사용 (UUID PK라 id 순서 불가)
 }

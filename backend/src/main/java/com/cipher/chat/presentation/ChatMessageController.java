@@ -13,10 +13,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-/**
- * 클라이언트가 /app/rooms/{roomId}/send 로 메시지를 보내면 저장 후
- * /topic/rooms/{roomId} 구독자 전체에게 fan-out 한다.
- */
 @Controller
 @RequiredArgsConstructor
 public class ChatMessageController {

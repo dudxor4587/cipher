@@ -442,6 +442,11 @@
   gap: 14px;
   align-items: flex-start;
 }
+.gpt-time {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 3px;
+}
 .gpt-assistant-body {
   flex: 1;
   min-width: 0;

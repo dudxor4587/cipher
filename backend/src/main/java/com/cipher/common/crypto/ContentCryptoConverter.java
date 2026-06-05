@@ -13,12 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * 민감 문자열(메시지 본문 등)을 AES-256-GCM 으로 저장 시 암호화/조회 시 복호화.
- * 저장 형식: base64( iv(12바이트) || ciphertext+tag ). 메시지마다 IV 랜덤.
- * 키는 환경변수(CIPHER_AES_KEY)에서 주입 → SHA-256으로 32바이트 키 도출.
- * Hibernate 가 Spring 빈으로 이 컨버터를 가져다 쓴다(Spring Boot 기본 설정).
- */
 @Component
 @Converter
 public class ContentCryptoConverter implements AttributeConverter<String, String> {

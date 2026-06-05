@@ -56,7 +56,7 @@ class RoomServiceTest extends BaseTest {
         RoomSummaryResponse r2 = roomService.createRoom(alice.userId(),
                 new CreateRoomRequest(RoomType.DIRECT, null, List.of(bob.userId())));
 
-        assertThat(r2.id()).isEqualTo(r1.id()); // 중복 생성 방지
+        assertThat(r2.id()).isEqualTo(r1.id());
     }
 
     @Test
@@ -69,11 +69,9 @@ class RoomServiceTest extends BaseTest {
                 new CreateRoomRequest(RoomType.DIRECT, null, List.of(bob.userId())));
         roomService.leave(alice.userId(), room.id());
 
-        // 나간 직후엔 내 목록에서 빠져 있어야 한다
         assertThat(roomService.getMyRooms(alice.userId()))
                 .noneMatch(r -> r.id().equals(room.id()));
 
-        // 같은 상대와 다시 시작 → 같은 방으로 dedup 되고, 나를 재합류시켜 목록에 다시 떠야 한다
         RoomSummaryResponse again = roomService.createRoom(alice.userId(),
                 new CreateRoomRequest(RoomType.DIRECT, null, List.of(bob.userId())));
 
@@ -88,14 +86,13 @@ class RoomServiceTest extends BaseTest {
         TokenResponse bob = signup("bob", "밥");
         TokenResponse carol = signup("carol", "캐롤");
         makeFriends(alice, bob);
-        makeFriends(alice, carol); // 밥↔캐롤은 친구 아님
+        makeFriends(alice, carol);
 
         RoomSummaryResponse group = roomService.createRoom(alice.userId(),
                 new CreateRoomRequest(RoomType.GROUP, "3팀", List.of(bob.userId(), carol.userId())));
         assertThat(group.type()).isEqualTo(RoomType.GROUP);
         assertThat(group.members()).hasSize(3);
 
-        // 캐롤 시점: 밥은 친구 아님 → tag 가려짐, 앨리스는 친구 → tag 노출
         RoomSummaryResponse carolView = roomService.getRoom(carol.userId(), group.id());
         RoomMemberView bobView = carolView.members().stream()
                 .filter(m -> m.userId().equals(bob.userId())).findFirst().orElseThrow();
@@ -132,10 +129,9 @@ class RoomServiceTest extends BaseTest {
 
         roomService.leave(bob.userId(), room.id());
 
-        // 나간 bob 목록엔 없음
         assertThat(roomService.getMyRooms(bob.userId()))
                 .extracting(RoomSummaryResponse::id).doesNotContain(room.id());
-        // 남은 alice 목록엔 그대로, 상대(bob) 이름도 계속 보임(멤버에 포함)
+
         assertThat(roomService.getMyRooms(alice.userId()))
                 .extracting(RoomSummaryResponse::id).contains(room.id());
         assertThat(roomService.getRoom(alice.userId(), room.id()).members())
