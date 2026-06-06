@@ -4,5 +4,6 @@ public record WebPushCommand(
         String endpoint,
         String p256dh,
         String auth,
-        String title) {
+        String title,
+        String roomId) {
 }

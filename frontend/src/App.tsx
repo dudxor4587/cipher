@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { setFavicon } from './core/favicon';
+import { trackActiveState } from './core/push';
 import { useApp } from './core/store';
 import { LoginPage } from './features/auth/LoginPage';
 import { ChatPage } from './features/chat/ChatPage';
@@ -13,6 +14,10 @@ export default function App() {
 
   useEffect(() => {
     bootstrap();
+    // 앱 시작마다 서비스워커 최신화 체크 (PWA 재실행 시 새 SW 자동 적용)
+    navigator.serviceWorker?.getRegistration().then((r) => r?.update()).catch(() => {});
+    // 포커스 상태를 SW 에 보고 (앱 보고 있을 때만 푸시 생략)
+    trackActiveState();
   }, [bootstrap]);
 
   // 로그인 전(공개 화면)은 중립 'cipher'(자물쇠) — 브랜드 노출 없음.

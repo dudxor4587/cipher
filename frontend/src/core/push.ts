@@ -7,6 +7,21 @@ export function pushSupported(): boolean {
   return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 }
 
+// 앱의 활성(포커스+보임) 상태를 SW 에 보고 → SW 가 푸시 표시 여부 판단.
+export function trackActiveState(): void {
+  if (!('serviceWorker' in navigator)) return;
+  const send = () => {
+    const value = document.visibilityState === 'visible' && document.hasFocus();
+    navigator.serviceWorker.ready
+      .then((reg) => reg.active?.postMessage({ type: 'active', value }))
+      .catch(() => {});
+  };
+  window.addEventListener('focus', send);
+  window.addEventListener('blur', send);
+  document.addEventListener('visibilitychange', send);
+  send();
+}
+
 export function pushEnabled(): boolean {
   return localStorage.getItem(ENABLED_KEY) === '1';
 }
@@ -54,14 +69,28 @@ export async function disablePush(): Promise<void> {
   await clearBadge();
 }
 
+// 사파리는 no-arg/0 배지가 깨져 있어 숫자를 넘겨야 한다. 크롬은 점(dot) 유지.
+const isSafari = /^((?!chrome|chromium|crios|edg).)*safari/i.test(navigator.userAgent);
+
 export async function setBadge(count: number): Promise<void> {
   const nav = navigator as Navigator & {
     setAppBadge?: (n?: number) => Promise<void>;
     clearAppBadge?: () => Promise<void>;
   };
   try {
-    if (count > 0 && nav.setAppBadge) await nav.setAppBadge(count);
-    else if (nav.clearAppBadge) await nav.clearAppBadge();
+    if (count > 0 && nav.setAppBadge) {
+      if (isSafari) await nav.setAppBadge(count);
+      else await nav.setAppBadge();
+    } else if (nav.clearAppBadge) {
+      await nav.clearAppBadge();
+    }
+  } catch {
+    /* ignore */
+  }
+  // SW 백그라운드 누적 카운트를 실제 미읽음 수로 동기화
+  try {
+    const reg = await navigator.serviceWorker?.ready;
+    reg?.active?.postMessage({ type: 'badge', count });
   } catch {
     /* ignore */
   }
@@ -69,4 +98,15 @@ export async function setBadge(count: number): Promise<void> {
 
 export async function clearBadge(): Promise<void> {
   await setBadge(0);
+}
+
+// 표시된 OS 알림(배너)을 닫는다 — 읽거나 앱에 돌아오면 dot 이 남지 않게.
+export async function clearNotifications(): Promise<void> {
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration();
+    const notes = (await reg?.getNotifications()) ?? [];
+    notes.forEach((n) => n.close());
+  } catch {
+    /* ignore */
+  }
 }

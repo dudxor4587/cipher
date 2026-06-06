@@ -24,10 +24,10 @@ public class WebPushClient {
     private final ExpiredPushSubscriptionHandler expiredPushSubscriptionHandler;
 
     @Async("pushTaskExecutor")
-    public void sendPushNotification(String endpoint, String p256dh, String auth, String title) {
+    public void sendPushNotification(String endpoint, String p256dh, String auth, String title, String roomId) {
         try {
             Subscription subscription = new Subscription(endpoint, new Subscription.Keys(p256dh, auth));
-            Notification notification = new Notification(subscription, buildPayload(title));
+            Notification notification = new Notification(subscription, buildPayload(title, roomId));
 
             HttpResponse response = pushService.sendAsync(notification)
                     .get(PUSH_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -47,8 +47,9 @@ public class WebPushClient {
         }
     }
 
-    private String buildPayload(String title) {
+    private String buildPayload(String title, String roomId) {
         String t = title == null ? "" : title.replace("\\", "\\\\").replace("\"", "\\\"");
-        return String.format("{\"title\":\"%s\",\"body\":\"%s\"}", t, t);
+        String r = roomId == null ? "" : roomId.replace("\\", "\\\\").replace("\"", "\\\"");
+        return String.format("{\"title\":\"%s\",\"body\":\"%s\",\"roomId\":\"%s\"}", t, t, r);
     }
 }

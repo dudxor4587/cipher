@@ -22,10 +22,11 @@ public class NotificationService {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onNewMessage(NewMessageEvent event) {
+        String roomId = event.roomId().toString();
         for (UUID userId : event.recipientUserIds()) {
             for (PushSubscription sub : pushSubscriptionRepository.findAllByUserId(userId)) {
                 webPushPort.sendPush(new WebPushCommand(
-                        sub.getEndpoint(), sub.getP256dh(), sub.getAuth(), HIDDEN_TITLE));
+                        sub.getEndpoint(), sub.getP256dh(), sub.getAuth(), HIDDEN_TITLE, roomId));
             }
         }
     }

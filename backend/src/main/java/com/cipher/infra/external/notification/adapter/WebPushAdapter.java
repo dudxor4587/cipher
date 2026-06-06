@@ -15,6 +15,6 @@ public class WebPushAdapter implements WebPushPort {
     @Override
     public void sendPush(WebPushCommand command) {
         webPushClient.sendPushNotification(
-                command.endpoint(), command.p256dh(), command.auth(), command.title());
+                command.endpoint(), command.p256dh(), command.auth(), command.title(), command.roomId());
     }
 }

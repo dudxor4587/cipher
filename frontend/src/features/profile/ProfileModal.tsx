@@ -65,7 +65,7 @@ export function ProfileModal({ onClose }: { onClose: () => void }) {
         <p className="hint">이름을 바꾸면 태그(#숫자)가 새로 부여될 수 있습니다.</p>
 
         {pushSupported() && (
-          <label className="toggle-row">
+          <div className="toggle-row">
             <span>알림</span>
             <button
               type="button"
@@ -76,7 +76,7 @@ export function ProfileModal({ onClose }: { onClose: () => void }) {
             >
               <span className="toggle-knob" />
             </button>
-          </label>
+          </div>
         )}
 
         {error && <div className="error">{error}</div>}

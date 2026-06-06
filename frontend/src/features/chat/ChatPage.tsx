@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { setBadge } from '../../core/push';
+import { clearNotifications, setBadge } from '../../core/push';
 import { useApp } from '../../core/store';
 import { getTheme, saveThemeKey, themeOptions } from '../../themes/registry';
 import type { SidebarTab } from '../../themes/types';
@@ -48,8 +48,52 @@ export function ChatPage({
     document.title = getTheme(themeKey).label;
   }, [themeKey]);
 
+  // 알림 클릭 딥링크: 앱이 닫혀있다 새 창으로 열리면 ?room= 으로 들어온다.
+  const [pendingRoom, setPendingRoom] = useState<string | null>(() => {
+    const r = new URLSearchParams(window.location.search).get('room');
+    if (r) window.history.replaceState({}, '', window.location.pathname);
+    return r;
+  });
+
+  // 방 목록이 로드되면 대기 중인 딥링크 방을 연다.
+  useEffect(() => {
+    if (pendingRoom && rooms.some((r) => r.id === pendingRoom)) {
+      void selectRoom(pendingRoom);
+      setPendingRoom(null);
+    }
+  }, [pendingRoom, rooms, selectRoom]);
+
+  // 앱이 이미 열려있을 때 알림 클릭 → SW 가 보내는 open-room 메시지로 방 이동.
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (e.data?.type === 'open-room' && e.data.roomId) {
+        if (rooms.some((r) => r.id === e.data.roomId)) void selectRoom(e.data.roomId);
+        else setPendingRoom(e.data.roomId);
+      }
+    };
+    navigator.serviceWorker?.addEventListener('message', onMsg);
+    return () => navigator.serviceWorker?.removeEventListener('message', onMsg);
+  }, [rooms, selectRoom]);
+
   useEffect(() => {
     void setBadge(totalUnread);
+    if (totalUnread === 0) void clearNotifications();
+  }, [totalUnread]);
+
+  // 앱으로 돌아오면(포커스) 알림 배너 닫고 현재 미읽음 기준으로 배지 재동기화 (SW가 남긴 잔상 제거)
+  useEffect(() => {
+    const onVisible = () => {
+      if (!document.hidden) {
+        void clearNotifications();
+        void setBadge(totalUnread);
+      }
+    };
+    window.addEventListener('focus', onVisible);
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.removeEventListener('focus', onVisible);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [totalUnread]);
 
   // 테마 변수(--bg, --accent 등)를 Layout 뿐 아니라 모달까지 닿게 하려면

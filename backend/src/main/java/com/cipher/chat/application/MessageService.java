@@ -58,7 +58,7 @@ public class MessageService {
                 .filter(id -> !id.equals(senderId))
                 .toList();
         if (!recipients.isEmpty()) {
-            eventPublisher.publishEvent(new NewMessageEvent(recipients));
+            eventPublisher.publishEvent(new NewMessageEvent(roomId, recipients));
         }
 
         return MessageResponse.from(message);
