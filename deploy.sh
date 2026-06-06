@@ -22,8 +22,8 @@ docker network inspect edge >/dev/null 2>&1 || docker network create edge
 gen_vapid() {
   local pem priv pub
   pem=$(openssl ecparam -genkey -name prime256v1 -noout)
-  priv=$(printf '%s' "$pem" | openssl ec -outform DER 2>/dev/null | tail -c +8 | head -c 32 | base64 | tr -d '=' | tr '/+' '_-')
-  pub=$(printf '%s'  "$pem" | openssl ec -pubout -outform DER 2>/dev/null | tail -c 65 | base64 | tr -d '=' | tr '/+' '_-')
+  priv=$(printf '%s' "$pem" | openssl ec -outform DER 2>/dev/null | tail -c +8 | head -c 32 | base64 | tr -d '=\n' | tr '/+' '_-')
+  pub=$(printf '%s'  "$pem" | openssl ec -pubout -outform DER 2>/dev/null | tail -c 65 | base64 | tr -d '=\n' | tr '/+' '_-')
   printf 'VAPID_PUBLIC_KEY=%s\nVAPID_PRIVATE_KEY=%s\n' "$pub" "$priv"
 }
 
